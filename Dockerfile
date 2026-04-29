@@ -1,5 +1,8 @@
 FROM python:3.13-slim
 
+# Force rebuild
+ARG CACHEBUST=1
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libgl1 \
