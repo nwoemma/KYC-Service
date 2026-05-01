@@ -85,8 +85,8 @@ def run_document_extraction(image_bytes: bytes, doc_type: str) -> dict:
                 ocr_results.append((box, text, conf))
             except (IndexError, TypeError):
                 continue
-        if not ocr_results:
-            raise ValueError("TEXT_UNREADABLE")
+    if not ocr_results:
+        raise ValueError("TEXT_UNREADABLE")
 
     fields = extract_fields(ocr_results, doc_type)
 
