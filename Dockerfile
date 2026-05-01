@@ -38,6 +38,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy application source
 COPY --chown=user . .
 
+ENV FLAGS_use_mkldnn=0
+ENV FLAGS_onednn_cpu=0
+ENV PADDLE_DISABLE_MKLDNN=1
 # Pre-download insightface models so they don't download on every cold start
 RUN python -c "from insightface.app import FaceAnalysis; app = FaceAnalysis(name='buffalo_s', providers=['CPUExecutionProvider']); app.prepare(ctx_id=0, det_size=(640, 640))"
 

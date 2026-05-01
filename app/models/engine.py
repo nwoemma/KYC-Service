@@ -1,3 +1,8 @@
+import os
+os.environ["FLAGS_use_mkldnn"] = "0"
+os.environ["FLAGS_onednn_cpu"] = "0"
+os.environ["PADDLE_DISABLE_MKLDNN"] = "1"
+
 import insightface
 from insightface.app import FaceAnalysis
 from paddleocr import PaddleOCR
