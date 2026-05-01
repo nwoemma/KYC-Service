@@ -76,15 +76,14 @@ def run_document_extraction(image_bytes: bytes, doc_type: str) -> dict:
     raw = engine.ocr_reader.ocr(processed)
     logger.info({"event": "ocr_raw_output", "data": str(raw)[:500]})
     ocr_results = []
-    for batch in raw:
-        if batch is None:
-            continue
-        for line in batch:
-            try:
-                box, (text, conf) = line[0], line[1]
-                ocr_results.append((box, text, conf))
-            except (IndexError, TypeError):
-                continue
+    for item in raw:
+        # New PaddleOCR format returns dict with 'rec_texts', 'rec_scores', 'det_polys'
+        texts = item.get("rec_texts", [])
+        scores = item.get("rec_scores", [])
+        boxes = item.get("det_polys", [])
+        for box, text, conf in zip(boxes, texts, scores):
+            ocr_results.append((box, text, conf))
+
     if not ocr_results:
         raise ValueError("TEXT_UNREADABLE")
 
