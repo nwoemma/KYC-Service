@@ -7,7 +7,7 @@ import numpy as np
 from app.models.engine import engine
 from app.config import settings
 from app.utils.image import decode_image, assess_document_quality
-
+from app.utils.logger import logger
 
 def preprocess(img: np.ndarray) -> np.ndarray:
     """Deskew, denoise, enhance contrast."""
@@ -74,6 +74,7 @@ def run_document_extraction(image_bytes: bytes, doc_type: str) -> dict:
     processed = preprocess(img)
 
     raw = engine.ocr_reader.ocr(processed)
+    logger.info({"event": "ocr_raw_output", "data": str(raw)[:500]})
     ocr_results = []
     for batch in raw:
         if batch is None:
