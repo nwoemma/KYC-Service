@@ -4,7 +4,11 @@ from typing import List
 
 class Settings(BaseSettings):
     # Auth
-    SERVICE_TOKENS: List[str] = []
+    SERVICE_TOKENS_RAW: str = ""
+
+    @property
+    def SERVICE_TOKENS(self) -> List[str]:
+        return [t.strip() for t in self.SERVICE_TOKENS_RAW.split(",") if t.strip()]
     
     # Rate limiting
     RATE_LIMIT_PER_MINUTE: int = 60
