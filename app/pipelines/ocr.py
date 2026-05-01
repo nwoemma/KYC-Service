@@ -74,7 +74,8 @@ def run_document_extraction(image_bytes: bytes, doc_type: str) -> dict:
     processed = preprocess(img)
 
     raw = engine.ocr_reader.ocr(processed)
-    logger.info({"event": "ocr_raw_output", "data": str(raw)[:500]})
+    logger.info({"event": "ocr_keys", "data": str(list(raw[0].keys())) if raw else "empty"})
+    logger.info({"event": "ocr_raw_output", "data": str(raw)[:1000]})
     ocr_results = []
     for item in raw:
         # New PaddleOCR format returns dict with 'rec_texts', 'rec_scores', 'det_polys'
