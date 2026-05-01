@@ -81,7 +81,7 @@ def run_document_extraction(image_bytes: bytes, doc_type: str) -> dict:
         # New PaddleOCR format returns dict with 'rec_texts', 'rec_scores', 'det_polys'
         texts = item.get("rec_texts", [])
         scores = item.get("rec_scores", [])
-        boxes = item.get("det_polys", [])
+        boxes = item.get("rec_polys", [])
         for box, text, conf in zip(boxes, texts, scores):
             ocr_results.append((box, text, conf))
 
