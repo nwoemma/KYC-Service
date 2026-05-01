@@ -23,4 +23,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "sleep 5 && echo 'Starting...' && uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level debug"]
+CMD ["sh", "-c", "sleep 5 && echo 'Starting...' && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --log-level debug"]
