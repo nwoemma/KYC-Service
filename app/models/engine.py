@@ -39,9 +39,6 @@ class ModelEngine:
         logger.info({"event": "loading_easyocr"})
         self.ocr_reader = PaddleOCR(
             lang="en",
-            use_angle_cls=False,
-            use_gpu=False,
-            enable_mkldnn=False,
         )
         logger.info({"event": "easyocr_loaded"})
 
