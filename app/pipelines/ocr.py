@@ -73,10 +73,19 @@ def run_document_extraction(image_bytes: bytes, doc_type: str) -> dict:
     quality = assess_document_quality(img)
     processed = preprocess(img)
 
-    ocr_results = engine.ocr_reader.ocr(processed)
-    ocr_results = [(line[0], line[1][0], line[1][1]) for batch in ocr_results for line in batch]
-    if not ocr_results:
-        raise ValueError("TEXT_UNREADABLE")
+    raw = engine.ocr_reader.ocr(processed)
+    ocr_results = []
+    for batch in raw:
+        if batch is None:
+            continue
+        for line in batch:
+            try:
+                box, (text, conf) = line[0], line[1]
+                ocr_results.append((box, text, conf))
+            except (IndexError, TypeError):
+                continue
+        if not ocr_results:
+            raise ValueError("TEXT_UNREADABLE")
 
     fields = extract_fields(ocr_results, doc_type)
 
