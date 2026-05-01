@@ -1,12 +1,12 @@
 import numpy as np
 from app.models.engine import engine
 from app.utils.image import decode_image, assess_quality
-
+from app.utils.logger import logger
 
 def extract_embedding(img: np.ndarray) -> tuple[np.ndarray, dict]:
     """Detect face, extract 512D embedding. Raises ValueError if 0 or >1 faces."""
     faces = engine.face_app.get(img)
-
+    logger.info({"event": "face_detection", "faces_found": len(faces), "img_shape": str(img.shape)})  # ← ADD
     if len(faces) == 0:
         raise ValueError("FACE_NOT_DETECTED")
     if len(faces) > 1:
