@@ -1,3 +1,6 @@
+import os
+os.environ["FLAGS_use_mkldnn"] = "0"  # ← ADD THIS
+os.environ["FLAGS_onednn_cpu"] = "0" 
 import re
 import cv2
 import numpy as np
