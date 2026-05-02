@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     FACE_MATCH_REVIEW_THRESHOLD: float = 0.55
 
     # Document types
-    ALLOWED_DOC_TYPES: List[str] = ["nin", "passport", "drivers_license"]
+    ALLOWED_DOC_TYPES: List[str] = ["nin", "passport", "drivers_license","nepa_bill"]
 
     # OCR confidence threshold
     OCR_CONFIDENCE_THRESHOLD: float = 0.60
