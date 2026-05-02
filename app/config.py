@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     RATE_LIMIT_PER_MINUTE: int = 60
 
     # File validation
-    MAX_FILE_SIZE_MB: int = 5
+    MAX_FILE_SIZE_MB: int = 10
     ALLOWED_MIME_TYPES: List[str] = ["image/jpeg", "image/png", "image/webp"]
 
     # Face matching thresholds

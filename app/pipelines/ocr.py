@@ -20,11 +20,14 @@ def preprocess(img: np.ndarray) -> np.ndarray:
 
 FIELD_PATTERNS = {
     "nin": {
-        "nin_number": r"\b\d{11}\b",
-        "full_name": r"(?:Name|NAME)[:\s]+([A-Z\s]+)",
-        "date_of_birth": r"\b(\d{2}[\/\-]\d{2}[\/\-]\d{4})\b",
-        "gender": r"\b(Male|Female|M|F)\b",
-    },
+    "nin_number":   r"(?:NIN)[:\s]*([\d]{11})",
+    "surname":      r"(?:Surname)[:\s]+([A-Z]+)",
+    "first_name":   r"(?:First\s*Name)[:\s]+([A-Z]+)",
+    "middle_name":  r"(?:Middle\s*Name)[:\s]+([A-Z]+)",
+    "gender":       r"(?:Gender)[:\s]+(Male|Female|M|F)\b",
+    "tracking_id":  r"(?:Tracking\s*ID)[:\s]*([A-Z0-9]+)",
+    "address":      r"(?:Address)[:\s]+([A-Za-z0-9\s\'\,\.]+)",
+},
     "passport": {
         "passport_number": r"\b[A-Z]{1}\d{8}\b",
         "full_name": r"(?:Surname|Given Names)[:\s]+([A-Z\s]+)",
@@ -39,6 +42,28 @@ FIELD_PATTERNS = {
         "expiry_date": r"(?:Expiry|Exp)[:\s]+(\d{2}[\/\-]\d{2}[\/\-]\d{4})",
         "state": r"(?:State)[:\s]+([A-Z\s]+)",
     },
+    "nepa_bill": {
+        "account_number":   r"(?:Account\s*No|Account\s*Numbe?r?|ACC\.?\s*NO)[:\s\.]*(\d+)",
+        "customer_name":    r"(?:Name)[:\s]+([A-Z][A-Za-z\s\.]+)",
+        "meter_number":     r"(?:Meter)[:\s#]*([A-Z0-9]+)",
+        "amount_due":       r"(?:PAY TOTAL DUE|PAY TOTAL DUE NOW|Total Bill)[^\d]*([\d,]+\.?\d*)",
+        "due_date":         r"(?:DUE DATE|Due Date)[:\s]+(\d{1,2}\s+[A-Z]{3}\s+\d{4})",
+        "supply_address":   r"(?:Supply Address)[:\s]+([A-Za-z0-9\s\,\.]+)",
+        "bill_address":     r"(?:Bill Delivery Address)[:\s]+([A-Za-z0-9\s\,\.]+)",
+        "bill_id":          r"(?:Bill\s*ID)[:\s]*(\d+)",
+        "billing_month":    r"(?:BILLING MONTH|energy used in)[:\s]*([A-Z]{3}[-\s]\d{4})",
+        "tin":              r"(?:TIN)[:\s]*([\d\-]+)",
+        "previous_balance": r"(?:Previous Bal)[:\s#.]*([^\s]+)",
+        "current_charges":  r"(?:Current Charges)[:\s#.]*([\d,]+\.?\d*)",
+        "vat":              r"(?:VAT)[^\d]*([\d,]+\.?\d*)",
+        "arrears":          r"(?:Net Arrears|Arrears)[:\s#.]*([\d,]+\.?\d*)",
+        "tariff_rate":      r"(?:TARIFF RATE|Rate)[:\s]*([\d\.]+)",
+        "mobile_number":    r"(?:Mobile No)[:\s]*([\d]+)",
+        "bill_period":      r"(?:MR DATE|Bill Prod\.\s*Date)[:\s]*(\d{1,2}\s+[A-Z]{3}\s+\d{4}|\d{2}\s+\w+\s+\d{4})",
+        "units_billed":     r"(?:UNITS BILLED|Units\s*Billed)[:\s]*([\d\.]+)",
+        "total_charges":    r"(?:TOTAL AMOUNT|TOTAL CHARGES)[^\d]*([\d,]+\.?\d*)",
+         "cin":              r"(?:CIN)[:\s]*([A-Z0-9]+)",
+},
 }
 
 
