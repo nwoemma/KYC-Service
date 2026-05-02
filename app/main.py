@@ -7,7 +7,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from app.models.engine import engine
 from app.middleware.auth import auth_middleware
 from app.middleware.rate_limiter import rate_limit_middleware
-from app.routes import match, extract
+from app.routes import match, extract, extract_image
 from app.utils.logger import logger
 
 startup_time = time.time()
@@ -37,6 +37,7 @@ app.add_middleware(BaseHTTPMiddleware, dispatch=rate_limit_middleware)
 # Routes
 app.include_router(match.router)
 app.include_router(extract.router)
+app.include_router(extract_image.router)
 
 
 @app.get("/health")
