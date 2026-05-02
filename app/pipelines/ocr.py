@@ -43,6 +43,7 @@ FIELD_PATTERNS = {
         "state": r"(?:State)[:\s]+([A-Z\s]+)",
     },
     "nepa_bill": {
+        "company_name":     r"(?:PORT HARCOURT|PHED|EEDC|IBEDC|EKEDC|BEDC|AEDC|KAEDCO)[A-Za-z\s]*(?:ELECTRICITY|DISTRIBUTION|COMPANY)?",
         "account_number":   r"(?:Account\s*No|Account\s*Numbe?r?|ACC\.?\s*NO)[:\s\.]*(\d+)",
         "customer_name":    r"(?:Name)[:\s]+([A-Z][A-Za-z\s\.]+)",
         "meter_number":     r"(?:Meter)[:\s#]*([A-Z0-9]+)",
